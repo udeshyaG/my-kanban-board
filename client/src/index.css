@@ -1,0 +1,93 @@
+/* KANBAN */
+
+div.kanban.column-header {
+  width: 25%;
+
+  border: 1px solid lightgray;
+  height: 7vh;
+}
+div.kanban.column-header.first {
+  border-top-left-radius: 20px;
+}
+div.kanban.column-header.last {
+  border-top-right-radius: 20px;
+}
+
+div.kanban.column {
+  width: 25%;
+  border: 1px solid lightgray;
+  height: 80vh;
+  overflow-y: auto;
+}
+div.kanban.column.todo {
+  border-bottom-left-radius: 20px;
+}
+div.kanban.column.done {
+  border-bottom-right-radius: 20px;
+}
+
+/* INDIVIDUAL TASK */
+div.task {
+  padding: 5px 3px 5px 10px;
+  border-radius: 10px;
+}
+
+div.task.status-todo {
+  background-color: #ffe5e5;
+}
+
+div.task.status-in-progress {
+  background-color: #c3ffeb;
+}
+
+div.task.status-testing {
+  background-color: #b6ea7d;
+}
+
+div.task.status-done {
+  background-color: #dd99ff;
+}
+
+/* LOGIN PAGE */
+div.login-page {
+  background-color: blue;
+}
+
+div.login-card {
+  max-width: 50vw;
+  border: solid 1px black;
+  border-radius: 1rem;
+}
+
+/* PROJECT LIST PAGE */
+div.project-list {
+  max-width: 90vh;
+  margin: 0 auto 5px auto;
+}
+i.project-icon {
+  font-size: 2.5rem;
+}
+
+/* ADD PROJECT */
+div.add-project-content {
+  max-width: 60vw;
+  margin: 0 auto 0 auto;
+}
+
+div.add-project-checkbox input {
+  margin-left: 15px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+img.rounded-image {
+  border-radius: 50%;
+  width: 136px;
+  height: 136px;
+}
+
+/* COMMENTS */
+div.single-comment {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
