@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import Spinner from '../components/spinner.gif';
 
 const Login = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -17,6 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await axios.post(
         '/api/auth/signin',
         {
@@ -38,8 +41,11 @@ const Login = () => {
         JSON.stringify({ user: loggedInUser, isLoggedIn: true })
       );
 
+      setLoading(false);
+
       history.push('/');
     } catch (err) {
+      setLoading(false);
       setErrorMsg('Unable to Login. Check Credentials');
     }
   };
@@ -84,6 +90,7 @@ const Login = () => {
         <button type='submit' className='btn btn-primary'>
           Login
         </button>
+        {loading && <img className='mx-5' src={Spinner} alt='Spinner' />}
       </form>
     </div>
   );

@@ -47,9 +47,9 @@ const KanbanBoard = () => {
 
   return (
     <div className='container'>
-      <div className='row align-items-center'>
+      <div className='row align-items-center my-2'>
         <div className='col-5'>
-          <h1 className='mt-3 mb-4'>{projectDetails.project_name}</h1>
+          <h2 className='mt-3 mb-4'>{projectDetails.project_name}</h2>
         </div>
         <div className='col-4 fw-light'>
           Created by : {projectDetails.created_by_user_id}

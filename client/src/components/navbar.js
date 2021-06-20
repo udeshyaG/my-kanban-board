@@ -21,8 +21,8 @@ const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <div className='container'>
-        <Link className='navbar-brand' to='/'>
-          Navbar
+        <Link className='navbar-brand fs-3 fw-bold' to='/'>
+          My Kanban
         </Link>
 
         <div className='d-flex' id='navbarNav'>
