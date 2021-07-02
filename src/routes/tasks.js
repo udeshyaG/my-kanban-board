@@ -48,16 +48,27 @@ router.post(
       const imageUrl = `https://my-kanban-board.s3.amazonaws.com/tasks/${image.originalname}`;
 
       try {
-        await knex(tableNames.tasks).insert({
-          project_id: projectId,
-          title,
-          description,
-          image_url: imageUrl,
-          assigned_user_id: assignedUserId,
-          status: taskStatus.todo,
-        });
+        const newTask = await knex(tableNames.tasks)
+          .insert({
+            project_id: projectId,
+            title,
+            description,
+            image_url: imageUrl,
+            assigned_user_id: assignedUserId,
+            status: taskStatus.todo,
+          })
+          .returning([
+            'title',
+            'description',
+            'task_id',
+            'image_url',
+            'status',
+            'image_url',
+            'project_id',
+            'assigned_user_id',
+          ]);
 
-        res.status(201).send({ msg: 'New Task created successfully' });
+        res.status(201).send(newTask);
       } catch (error) {
         console.log(error);
         res.status(500).send({ error: 'Something went wrong' });

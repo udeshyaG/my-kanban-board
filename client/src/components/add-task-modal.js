@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Spinner from './spinner.gif';
 
-const AddTaskModal = ({ membersList, projectId }) => {
+const AddTaskModal = ({ membersList, projectId, handleAddNewTask }) => {
   // Context API
   const [auth, setAuth] = useContext(AuthContext);
 
@@ -14,8 +13,7 @@ const AddTaskModal = ({ membersList, projectId }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-
-  const history = useHistory();
+  const [successMsg, setSuccessMsg] = useState('');
 
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -35,12 +33,16 @@ const AddTaskModal = ({ membersList, projectId }) => {
     setLoading(true);
 
     try {
-      await axios.post('/api/tasks/new', data, {
+      const response = await axios.post('/api/tasks/new', data, {
         withCredentials: true,
       });
       setLoading(false);
 
-      history.go(0);
+      // history.go(0);
+      setSuccessMsg('New Task added successfully!');
+      setTitle('');
+      setDescription('');
+      handleAddNewTask(response.data[0]);
     } catch (error) {
       setErrorMsg('Something went wrong. Please enter all fields');
       setLoading(false);
@@ -111,6 +113,12 @@ const AddTaskModal = ({ membersList, projectId }) => {
               {errorMsg && (
                 <div class='alert alert-danger my-3' role='alert'>
                   {errorMsg}
+                </div>
+              )}
+
+              {successMsg && (
+                <div class='alert alert-success my-3' role='alert'>
+                  {successMsg}
                 </div>
               )}
 

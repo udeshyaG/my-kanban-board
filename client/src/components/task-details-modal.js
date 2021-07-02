@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import CommentsList from '../components/comments-list';
 
 const TaskDetailsModal = ({ task }) => {
   const [commentsList, setCommentsList] = useState([]);
   const [text, setText] = useState('');
   const [showComments, setShowComments] = useState(false);
-
-  const history = useHistory();
 
   const handleShowComments = async () => {
     const commentsResponse = await axios.get(
@@ -23,13 +20,14 @@ const TaskDetailsModal = ({ task }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
+    const response = await axios.post(
       '/api/comment/new',
       { taskId: task.task_id, text },
       { withCredentials: true }
     );
 
-    history.go(0);
+    setCommentsList([...commentsList, response.data[0]]);
+    setText('');
   };
 
   return (

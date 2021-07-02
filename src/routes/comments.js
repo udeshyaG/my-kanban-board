@@ -25,13 +25,15 @@ router.post(
     const { taskId, text } = req.body;
 
     try {
-      await knex(tableNames.comments).insert({
-        task_id: taskId,
-        text,
-        user_id: req.currentuser.userId,
-      });
+      const newComment = await knex(tableNames.comments)
+        .insert({
+          task_id: taskId,
+          text,
+          user_id: req.currentuser.userId,
+        })
+        .returning(['comment_id', 'task_id', 'text', 'user_id']);
 
-      res.send({ msg: 'Comment created successfully' });
+      res.send(newComment);
     } catch (error) {
       console.log(error);
       res.status(500).send({ error: 'Something went wrong' });

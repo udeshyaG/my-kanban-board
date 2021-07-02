@@ -19,6 +19,10 @@ const KanbanBoard = () => {
     setModalTask(tasksList.find((task) => task.task_id === taskId));
   }
 
+  function handleAddNewTask(newTask) {
+    setTasksList([...tasksList, newTask]);
+  }
+
   useEffect(() => {
     async function fetchData() {
       const projectDetailsResponse = await axios.get(
@@ -47,9 +51,9 @@ const KanbanBoard = () => {
 
   return (
     <div className='container'>
-      <div className='row align-items-center my-2'>
+      <div className='row align-items-center'>
         <div className='col-5'>
-          <h2 className='mt-3 mb-4'>{projectDetails.project_name}</h2>
+          <h1 className='mt-3 mb-4'>{projectDetails.project_name}</h1>
         </div>
         <div className='col-4 fw-light'>
           Created by : {projectDetails.created_by_user_id}
@@ -141,7 +145,11 @@ const KanbanBoard = () => {
       >
         Add New Task <i class='fa fa-plus'></i>
       </button>
-      <AddTaskModal membersList={membersList} projectId={projectId} />
+      <AddTaskModal
+        membersList={membersList}
+        projectId={projectId}
+        handleAddNewTask={handleAddNewTask}
+      />
       {modalTask && <TaskDetailsModal task={modalTask} />}
       {modalTask && (
         <EditTaskModal task={modalTask} membersList={membersList} />
