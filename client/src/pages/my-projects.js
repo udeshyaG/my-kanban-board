@@ -5,14 +5,17 @@ import SingleProject from '../components/single-project';
 
 const MyProjects = () => {
   const [projectList, setProjectList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchProjectList() {
+      setIsLoading(true);
       const response = await axios.get('/api/projects/list', {
         withCredentials: true,
       });
 
       setProjectList(response.data);
+      setIsLoading(false);
     }
     fetchProjectList();
   }, []);
@@ -26,6 +29,8 @@ const MyProjects = () => {
           projectList.map((project) => {
             return <SingleProject project={project} />;
           })
+        ) : isLoading ? (
+          <p className='text-warning text-center'>Loading Projects ⏳</p>
         ) : (
           <p className='text-danger text-center'>No Projects Yet</p>
         )}
