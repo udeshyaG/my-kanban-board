@@ -12,4 +12,4 @@ before_install:
   - export CI=true
 
 script:
-  - cd client && npm test
+  - npm run custom-react-test
