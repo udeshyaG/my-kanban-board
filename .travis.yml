@@ -1,15 +1,11 @@
-language: node_js
+sudo: required
+language: generic
 
-node_js:
-  - 'stable'
-
-cache:
-  directories:
-    - client/node_modules
+services:
+  - docker
 
 before_install:
-  - cd client && npm install
-  - export CI=true
+  - docker build -t udeshyagiri/my-kanban-client -f ./client/Dockerfile.dev ./client
 
 script:
-  - npm run custom-react-test
+  - docker run -e CI=true udeshyagiri/my-kanban-client npm run test
