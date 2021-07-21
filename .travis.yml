@@ -8,6 +8,7 @@ cache:
     - client/node_modules
 
 before_install:
+  - cd client && npm install
   - export CI=true
 
 script:
