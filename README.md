@@ -1,4 +1,4 @@
-# Full Stack Kanban Board
+# Full Stack Kanban Board  [![Build Status](https://www.travis-ci.com/udeshyaG/my-kanban-board.svg?branch=master)](https://www.travis-ci.com/udeshyaG/my-kanban-board)
 
 ### [Click Here](https://ancient-waters-77774.herokuapp.com) to view app 🚀
 
