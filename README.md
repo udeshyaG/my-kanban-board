@@ -9,6 +9,7 @@
 - Postgres SQL (Database) 💾
 - AWS S3 (Image storage) ☁
 - Heroku (Deployment) ⚡
+- Travis CI (Automated Testing) 👷‍♂️
 
 ---
 
